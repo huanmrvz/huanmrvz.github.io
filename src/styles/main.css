@@ -235,6 +235,10 @@ button {
   width: 100%;
   max-width: var(--max);
   margin: 0 auto;
+  display: grid;
+  gap: 1.75rem;
+  align-items: center;
+  justify-items: start;
   padding:
     calc(var(--header-h) + var(--safe-top) + 1.25rem)
     calc(var(--pad) + var(--safe-right))
@@ -242,10 +246,42 @@ button {
     calc(var(--pad) + var(--safe-left));
 }
 
+.hero-copy {
+  min-width: 0;
+}
+
+.hero-portrait {
+  margin: 0;
+  width: min(42vw, 11.5rem);
+  justify-self: start;
+  opacity: 0;
+  transform: translateY(1rem) scale(0.96);
+  animation: rise-in 1s var(--ease) 0.35s forwards;
+}
+
+.hero-portrait img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
 @media (min-width: 720px) {
   .hero {
     min-height: 88svh;
     min-height: 88dvh;
+  }
+
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(14rem, 0.7fr);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .hero-portrait {
+    width: min(100%, 22rem);
+    justify-self: end;
   }
 }
 
@@ -832,10 +868,12 @@ body:has(.lightbox:not([hidden])) .fab-telegram {
   .brand,
   .hero-tagline,
   .cta,
+  .hero-portrait,
   .work-item {
     animation: none;
     opacity: 1;
     --ty: 0;
+    transform: none;
     transition: none;
   }
 
