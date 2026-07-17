@@ -196,36 +196,36 @@ button {
   }
 }
 
-/* Hero */
+/* Hero — first screen: brand + tagline + CTA over full-bleed image */
 .hero {
   position: relative;
-  min-height: 100svh;
-  min-height: 100dvh;
+  min-height: 78svh;
+  min-height: 78dvh;
   display: grid;
-  place-items: end start;
+  align-items: center;
+  justify-items: start;
   overflow: hidden;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(200, 255, 61, 0.08), transparent 55%),
-    linear-gradient(160deg, #1c1814 0%, #0c0b0a 45%, #15120f 100%),
-    repeating-linear-gradient(
-      -12deg,
-      transparent,
-      transparent 48px,
-      rgba(242, 235, 227, 0.015) 48px,
-      rgba(242, 235, 227, 0.015) 49px
-    );
+  background-color: #0e0c0a;
+  background-image:
+    linear-gradient(
+      to top,
+      var(--bg) 0%,
+      rgba(18, 16, 14, 0.55) 38%,
+      rgba(18, 16, 14, 0.25) 70%,
+      rgba(18, 16, 14, 0.45) 100%
+    ),
+    url("/hero-bg.svg");
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, var(--bg) 0%, transparent 42%);
+  content: none;
 }
 
 .hero-inner {
@@ -235,10 +235,17 @@ button {
   max-width: var(--max);
   margin: 0 auto;
   padding:
-    calc(var(--header-h) + var(--safe-top) + 2.5rem)
+    calc(var(--header-h) + var(--safe-top) + 1.25rem)
     calc(var(--pad) + var(--safe-right))
-    calc(3rem + var(--safe-bottom))
+    calc(2.5rem + var(--safe-bottom))
     calc(var(--pad) + var(--safe-left));
+}
+
+@media (min-width: 720px) {
+  .hero {
+    min-height: 88svh;
+    min-height: 88dvh;
+  }
 }
 
 .brand {
