@@ -27,13 +27,6 @@ export const works = [
     poster: "/works/burger-cut.png",
     url: "https://www.tiktok.com/@huanmrvz/video/7661282048660868373",
   },
-  {
-    id: "brand-reel",
-    title: { ru: "Brand Reel", en: "Brand Reel" },
-    tag: { ru: "Реклама", en: "Commercial" },
-    poster: "/works/brand-reel.svg",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  },
 ];
 
 export function toEmbedUrl(url) {
