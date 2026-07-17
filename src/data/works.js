@@ -13,17 +13,17 @@ export const works = [
     url: "https://youtu.be/ViXlQpNwhg8",
   },
   {
-    id: "motion-reel",
-    title: { ru: "Motion Reel", en: "Motion Reel" },
+    id: "chasiki",
+    title: { ru: "Часики тикают", en: "Clock's Ticking" },
     tag: { ru: "Motion", en: "Motion" },
-    poster: "/works/motion-reel.svg",
+    poster: "/works/chasiki.png",
     url: "https://www.tiktok.com/@huanmrvz/video/7663483963192708373",
   },
   {
     id: "burger-cut",
     title: { ru: "Burger Cut", en: "Burger Cut" },
     tag: { ru: "Стиль", en: "Style" },
-    poster: "/works/burger-cut.svg",
+    poster: "/works/burger-cut.png",
     url: "https://www.tiktok.com/@huanmrvz/video/7661282048660868373",
   },
   {

@@ -11,7 +11,7 @@ export const translations = {
     "about.title": "О себе",
     "about.lead": "Монтаж — это не склейка. Это темп, удар и пауза.",
     "about.text":
-      "Собираю дайджесты, YouTube и короткие ролики. Ищу ритм, который держит внимание, и кадр, который говорит сам — особенно в CS и динамичных нарезках.",
+      "Собираю дайджесты, YouTube и короткие ролики. Ищу ритм, который держит внимание, и кадр, который говорит сам.",
     "about.mark1": "ритм",
     "about.mark2": "кадр",
     "about.mark3": "история",
@@ -35,7 +35,7 @@ export const translations = {
     "about.title": "About",
     "about.lead": "Editing isn't glue. It's pace, hit, and silence.",
     "about.text":
-      "I cut digests, YouTube, and short-form. Looking for rhythm that holds attention and frames that speak — especially CS and fast-paced cuts.",
+      "I cut digests, YouTube, and short-form. Looking for rhythm that holds attention and frames that speak for themselves.",
     "about.mark1": "rhythm",
     "about.mark2": "frame",
     "about.mark3": "story",
