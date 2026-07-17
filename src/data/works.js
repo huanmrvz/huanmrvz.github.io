@@ -1,8 +1,8 @@
 /**
  * Replace poster paths, titles, tags, and urls with your real work.
- * poster — image in /public/works/
- * url — YouTube / Vimeo / VK / direct link
- * embed — optional embed URL for lightbox (auto-derived for YouTube if omitted)
+ * poster — image in /public/works/ or external thumbnail URL
+ * url — YouTube / Vimeo / TikTok / VK / direct link
+ * embed — optional embed URL for lightbox (auto-derived for YT/Vimeo/TikTok if omitted)
  */
 export const works = [
   {
@@ -13,18 +13,18 @@ export const works = [
     url: "https://youtu.be/ViXlQpNwhg8",
   },
   {
-    id: "city-cut",
-    title: { ru: "City Cut", en: "City Cut" },
-    tag: { ru: "YouTube", en: "YouTube" },
-    poster: "/works/city-cut.svg",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    id: "motion-reel",
+    title: { ru: "Motion Reel", en: "Motion Reel" },
+    tag: { ru: "Motion", en: "Motion" },
+    poster: "/works/motion-reel.svg",
+    url: "https://www.tiktok.com/@huanmrvz/video/7663483963192708373",
   },
   {
-    id: "afterglow",
-    title: { ru: "Afterglow", en: "Afterglow" },
-    tag: { ru: "Короткая форма", en: "Short-form" },
-    poster: "/works/afterglow.svg",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    id: "burger-cut",
+    title: { ru: "Burger Cut", en: "Burger Cut" },
+    tag: { ru: "Стиль", en: "Style" },
+    poster: "/works/burger-cut.svg",
+    url: "https://www.tiktok.com/@huanmrvz/video/7661282048660868373",
   },
   {
     id: "brand-reel",
@@ -49,8 +49,16 @@ export function toEmbedUrl(url) {
       const id = u.pathname.split("/").filter(Boolean).pop();
       if (id) return `https://player.vimeo.com/video/${id}`;
     }
+    if (u.hostname.includes("tiktok.com")) {
+      const match = u.pathname.match(/\/video\/(\d+)/);
+      if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
+    }
   } catch {
     /* ignore */
   }
   return null;
+}
+
+export function isVerticalEmbed(embedUrl) {
+  return Boolean(embedUrl && embedUrl.includes("tiktok.com"));
 }

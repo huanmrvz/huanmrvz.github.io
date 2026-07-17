@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141810"/>
+      <stop offset="55%" stop-color="#0c0b0a"/>
+      <stop offset="100%" stop-color="#243018"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <g opacity="0.9">
+    <rect x="180" y="160" width="220" height="280" fill="#1c2414" stroke="#c8ff3d" stroke-width="3" opacity="0.85"/>
+    <rect x="430" y="220" width="220" height="280" fill="#1a2012" stroke="#f2ebe3" stroke-width="2" opacity="0.55"/>
+    <rect x="680" y="140" width="220" height="280" fill="#1e2816" stroke="#c8ff3d" stroke-width="3" opacity="0.7"/>
+  </g>
+  <circle cx="980" cy="520" r="90" fill="#c8ff3d" opacity="0.15"/>
+  <text x="80" y="700" fill="#f2ebe3" font-family="system-ui,sans-serif" font-size="44" font-weight="700">Motion</text>
+</svg>

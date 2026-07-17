@@ -1,6 +1,6 @@
 import "./styles/main.css";
 import { applyTranslations, getInitialLang, STORAGE_KEY } from "./i18n.js";
-import { works, toEmbedUrl } from "./data/works.js";
+import { works, toEmbedUrl, isVerticalEmbed } from "./data/works.js";
 
 let currentLang = getInitialLang();
 
@@ -73,6 +73,7 @@ function bindWorkClicks() {
 }
 
 const lightbox = document.getElementById("lightbox");
+const lightboxInner = document.querySelector(".lightbox-inner");
 const frame = document.getElementById("lightbox-frame");
 const external = document.getElementById("lightbox-external");
 const closeBtn = document.querySelector(".lightbox-close");
@@ -81,6 +82,7 @@ function openLightbox(embed, url) {
   if (!lightbox || !frame || !external) return;
   frame.src = embed;
   external.href = url;
+  lightboxInner?.classList.toggle("is-vertical", isVerticalEmbed(embed));
   lightbox.hidden = false;
   document.body.style.overflow = "hidden";
 }
@@ -89,6 +91,7 @@ function closeLightbox() {
   if (!lightbox || !frame) return;
   lightbox.hidden = true;
   frame.src = "";
+  lightboxInner?.classList.remove("is-vertical");
   document.body.style.overflow = "";
 }
 

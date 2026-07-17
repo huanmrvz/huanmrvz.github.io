@@ -686,6 +686,17 @@ button {
   background: #000;
 }
 
+.lightbox-inner.is-vertical {
+  width: min(420px, 100%);
+  align-items: center;
+}
+
+.lightbox-inner.is-vertical iframe {
+  aspect-ratio: 9 / 16;
+  max-height: min(78vh, 720px);
+  width: min(100%, 360px);
+}
+
 .lightbox-close {
   position: absolute;
   top: calc(0.65rem + var(--safe-top));
@@ -716,8 +727,12 @@ button {
     padding: 1.5rem;
   }
 
-  .lightbox-inner iframe {
+  .lightbox-inner:not(.is-vertical) iframe {
     max-height: none;
+  }
+
+  .lightbox-inner.is-vertical {
+    align-items: center;
   }
 
   .lightbox-close {
