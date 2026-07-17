@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <radialGradient id="g" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#4a2a24"/>
+      <stop offset="100%" stop-color="#100e0c"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <ellipse cx="900" cy="180" rx="280" ry="160" fill="#c8ff3d" opacity="0.1"/>
+  <text x="80" y="140" fill="#f2ebe3" font-family="system-ui,sans-serif" font-size="44" font-weight="700">Afterglow</text>
+</svg>
