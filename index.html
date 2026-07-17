@@ -51,11 +51,11 @@
       <section id="about" class="section about" aria-labelledby="about-title">
         <div class="about-copy">
           <h2 id="about-title" data-i18n="about.title">О себе</h2>
-          <p class="about-lead" data-i18n="about.lead">
-            Монтаж — это не склейка. Это темп, удар и пауза.
+          <p class="about-lead" data-i18n-html="about.leadHtml">
+            Монтаж — это не склейка. Это <span class="accent">темп</span>, <span class="accent">удар</span> и <span class="accent">пауза</span>.
           </p>
-          <p class="about-text" data-i18n="about.text">
-            Собираю дайджесты, YouTube и короткие ролики. Ищу ритм, который держит внимание, и кадр, который говорит сам.
+          <p class="about-text" data-i18n-html="about.textHtml">
+            Собираю <span class="accent">дайджесты</span>, YouTube и короткие ролики. Ищу <span class="accent">ритм</span>, который держит внимание, и <span class="accent">кадр</span>, который говорит сам.
           </p>
           <ul class="about-marks">
             <li data-i18n="about.mark1">ритм</li>
@@ -96,6 +96,21 @@
     <footer class="site-footer">
       <p data-i18n="footer">© huanmrvz</p>
     </footer>
+
+    <a
+      class="fab-telegram"
+      href="https://t.me/huanmrvz"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg class="fab-telegram-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M21.5 3.4 2.8 10.6c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.7.4 1 .9 1 .6 0 .8-.2 1.1-.5l2.7-2.6 5.6 4.1c1 .6 1.8.3 2-.9L23 4.7c.3-1.3-.5-1.9-1.5-1.3Z"
+        />
+      </svg>
+      <span data-i18n="fab.telegram">Написать</span>
+    </a>
 
     <div id="lightbox" class="lightbox" hidden>
       <button type="button" class="lightbox-close" aria-label="Close">&times;</button>

@@ -14,7 +14,7 @@ function renderWorks() {
       const tag = work.tag[currentLang] ?? work.tag.en;
       return `
         <a
-          class="work-item"
+          class="work-item${work.vertical ? " work-item--vertical" : ""}"
           href="${work.url}"
           data-index="${index}"
           data-url="${work.url}"

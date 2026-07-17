@@ -18,6 +18,7 @@ export const works = [
     tag: { ru: "Motion", en: "Motion" },
     poster: "/works/chasiki.png",
     url: "https://www.tiktok.com/@huanmrvz/video/7663483963192708373",
+    vertical: true,
   },
   {
     id: "burger-cut",

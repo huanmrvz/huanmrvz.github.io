@@ -9,9 +9,10 @@ export const translations = {
     "works.title": "Работы",
     "works.lead": "Избранные монтажи — клипы, ролики, короткие формы.",
     "about.title": "О себе",
-    "about.lead": "Монтаж — это не склейка. Это темп, удар и пауза.",
-    "about.text":
-      "Собираю дайджесты, YouTube и короткие ролики. Ищу ритм, который держит внимание, и кадр, который говорит сам.",
+    "about.leadHtml":
+      'Монтаж — это не склейка. Это <span class="accent">темп</span>, <span class="accent">удар</span> и <span class="accent">пауза</span>.',
+    "about.textHtml":
+      'Собираю <span class="accent">дайджесты</span>, YouTube и короткие ролики. Ищу <span class="accent">ритм</span>, который держит внимание, и <span class="accent">кадр</span>, который говорит сам.',
     "about.mark1": "ритм",
     "about.mark2": "кадр",
     "about.mark3": "история",
@@ -20,6 +21,7 @@ export const translations = {
     "contact.telegram": "Telegram",
     "contact.email": "Email",
     "contact.instagram": "Instagram",
+    "fab.telegram": "Написать",
     footer: "© huanmrvz",
     "lightbox.open": "Открыть оригинал",
   },
@@ -33,9 +35,10 @@ export const translations = {
     "works.title": "Works",
     "works.lead": "Selected edits — music videos, YouTube, short-form.",
     "about.title": "About",
-    "about.lead": "Editing isn't glue. It's pace, hit, and silence.",
-    "about.text":
-      "I cut digests, YouTube, and short-form. Looking for rhythm that holds attention and frames that speak for themselves.",
+    "about.leadHtml":
+      'Editing isn\'t glue. It\'s <span class="accent">pace</span>, <span class="accent">hit</span>, and <span class="accent">silence</span>.',
+    "about.textHtml":
+      'I cut <span class="accent">digests</span>, YouTube, and short-form. Looking for <span class="accent">rhythm</span> that holds attention and <span class="accent">frames</span> that speak for themselves.',
     "about.mark1": "rhythm",
     "about.mark2": "frame",
     "about.mark3": "story",
@@ -44,6 +47,7 @@ export const translations = {
     "contact.telegram": "Telegram",
     "contact.email": "Email",
     "contact.instagram": "Instagram",
+    "fab.telegram": "Message",
     footer: "© huanmrvz",
     "lightbox.open": "Open original",
   },
@@ -64,6 +68,12 @@ export function applyTranslations(lang) {
     const key = el.getAttribute("data-i18n");
     if (key && dict[key] != null) {
       el.textContent = dict[key];
+    }
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-html");
+    if (key && dict[key] != null) {
+      el.innerHTML = dict[key];
     }
   });
   document.querySelectorAll(".lang-btn").forEach((btn) => {
