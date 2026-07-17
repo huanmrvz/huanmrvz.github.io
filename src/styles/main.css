@@ -246,12 +246,12 @@ button {
   max-width: 100%;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.75rem, 15vw, 9.5rem);
-  line-height: 0.88;
-  letter-spacing: -0.045em;
+  /* Keep "huanmrvz" on one line from ~320px up */
+  font-size: clamp(2.15rem, 11vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   text-transform: lowercase;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
   opacity: 0;
   transform: translateY(1.25rem);
   animation: rise-in 1s var(--ease) 0.15s forwards;
