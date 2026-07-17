@@ -6,11 +6,11 @@
  */
 export const works = [
   {
-    id: "pulse-night",
-    title: { ru: "Pulse Night", en: "Pulse Night" },
-    tag: { ru: "Клип", en: "Music video" },
-    poster: "/works/pulse-night.svg",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    id: "cs2-digest",
+    title: { ru: "CS2 Digest", en: "CS2 Digest" },
+    tag: { ru: "Дайджест", en: "Digest" },
+    poster: "https://img.youtube.com/vi/ViXlQpNwhg8/maxresdefault.jpg",
+    url: "https://youtu.be/ViXlQpNwhg8",
   },
   {
     id: "city-cut",
