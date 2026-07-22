@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10140c"/>
+      <stop offset="55%" stop-color="#0c0b0a"/>
+      <stop offset="100%" stop-color="#1c2814"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="1280" fill="url(#g)"/>
+  <circle cx="520" cy="320" r="180" fill="#c8ff3d" opacity="0.12"/>
+  <rect x="80" y="520" width="560" height="8" fill="#c8ff3d" opacity="0.7"/>
+  <text x="80" y="500" fill="#f2ebe3" font-family="system-ui,sans-serif" font-size="56" font-weight="700">Glidex</text>
+  <text x="80" y="580" fill="#9a9186" font-family="system-ui,sans-serif" font-size="28"><5=LH5 ;8H=53></text>
+</svg>

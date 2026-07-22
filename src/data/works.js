@@ -1,10 +1,18 @@
 /**
  * Replace poster paths, titles, tags, and urls with your real work.
  * poster — image in /public/works/ or external thumbnail URL
- * url — YouTube / Vimeo / TikTok / VK / direct link
- * embed — optional embed URL for lightbox (auto-derived for YT/Vimeo/TikTok if omitted)
+ * url — YouTube / Vimeo / TikTok / Instagram / VK / direct link
+ * embed — optional embed URL for lightbox (auto-derived when omitted)
  */
 export const works = [
+  {
+    id: "glidex",
+    title: { ru: "Glidex", en: "Glidex" },
+    tag: { ru: "Reel", en: "Reel" },
+    poster: "/works/glidex.svg",
+    url: "https://www.instagram.com/reel/DbGSFgFhdCK/",
+    vertical: true,
+  },
   {
     id: "cs2-digest",
     title: { ru: "CS2 Digest", en: "CS2 Digest" },
@@ -47,6 +55,10 @@ export function toEmbedUrl(url) {
       const match = u.pathname.match(/\/video\/(\d+)/);
       if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
     }
+    if (u.hostname.includes("instagram.com")) {
+      const match = u.pathname.match(/\/(reel|p|tv)\/([^/?]+)/);
+      if (match) return `https://www.instagram.com/${match[1]}/${match[2]}/embed`;
+    }
   } catch {
     /* ignore */
   }
@@ -54,5 +66,8 @@ export function toEmbedUrl(url) {
 }
 
 export function isVerticalEmbed(embedUrl) {
-  return Boolean(embedUrl && embedUrl.includes("tiktok.com"));
+  return Boolean(
+    embedUrl &&
+      (embedUrl.includes("tiktok.com") || embedUrl.includes("instagram.com")),
+  );
 }
