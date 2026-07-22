@@ -1,6 +1,6 @@
 # huanmrvz portfolio
 
-Двуязычное (RU/EN) портфолио монтажёра. Стек: Vite + vanilla JS. Хостинг: GitHub Pages.
+Двуязычное (RU/EN) портфолио монтажёра. Стек: Vite + React. Хостинг: GitHub Pages.
 
 ## Локально
 

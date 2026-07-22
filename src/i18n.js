@@ -8,6 +8,7 @@ export const translations = {
     "hero.cta": "Смотреть работы",
     "works.title": "Работы",
     "works.lead": "Избранные монтажи — клипы, ролики, короткие формы.",
+    "works.watch": "Смотреть",
     "about.title": "О себе",
     "about.leadHtml":
       'Монтаж — это не склейка. Это <span class="accent">темп</span>, <span class="accent">удар</span> и <span class="accent">пауза</span>.',
@@ -34,6 +35,7 @@ export const translations = {
     "hero.cta": "View work",
     "works.title": "Works",
     "works.lead": "Selected edits — music videos, YouTube, short-form.",
+    "works.watch": "Watch",
     "about.title": "About",
     "about.leadHtml":
       'Editing isn\'t glue. It\'s <span class="accent">pace</span>, <span class="accent">hit</span>, and <span class="accent">silence</span>.',
@@ -56,27 +58,8 @@ export const translations = {
 export const STORAGE_KEY = "huanmrvz-lang";
 
 export function getInitialLang() {
+  if (typeof window === "undefined") return "ru";
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved === "ru" || saved === "en") return saved;
   return navigator.language?.toLowerCase().startsWith("ru") ? "ru" : "en";
-}
-
-export function applyTranslations(lang) {
-  const dict = translations[lang] ?? translations.ru;
-  document.documentElement.lang = lang;
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    if (key && dict[key] != null) {
-      el.textContent = dict[key];
-    }
-  });
-  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-html");
-    if (key && dict[key] != null) {
-      el.innerHTML = dict[key];
-    }
-  });
-  document.querySelectorAll(".lang-btn").forEach((btn) => {
-    btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
-  });
 }
