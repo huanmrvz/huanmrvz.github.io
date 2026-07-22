@@ -9,7 +9,7 @@ export const works = [
     id: "glidex",
     title: { ru: "Glidex", en: "Glidex" },
     tag: { ru: "Reel", en: "Reel" },
-    poster: "/works/glidex.svg",
+    poster: "/works/glidex.png",
     url: "https://www.instagram.com/reel/DbGSFgFhdCK/",
     vertical: true,
   },
