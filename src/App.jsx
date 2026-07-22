@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { LanguageProvider } from "./context/LanguageContext.jsx";
+import { SmoothScroll } from "./components/SmoothScroll.jsx";
+import { CustomCursor } from "./components/CustomCursor.jsx";
 import { Header } from "./components/Header.jsx";
 import { Hero } from "./components/Hero.jsx";
 import { Works } from "./components/Works.jsx";
@@ -14,17 +16,20 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      <div className="grain" aria-hidden="true" />
-      <Header />
-      <main id="top">
-        <Hero />
-        <Works onOpenWork={setLightbox} />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-      <FabTelegram />
-      <Lightbox active={lightbox} onClose={() => setLightbox(null)} />
+      <SmoothScroll>
+        <div className="grain" aria-hidden="true" />
+        <CustomCursor />
+        <Header />
+        <main id="top">
+          <Hero />
+          <Works onOpenWork={setLightbox} />
+          <About />
+          <Contact />
+        </main>
+        <Footer />
+        <FabTelegram />
+        <Lightbox active={lightbox} onClose={() => setLightbox(null)} />
+      </SmoothScroll>
     </LanguageProvider>
   );
 }

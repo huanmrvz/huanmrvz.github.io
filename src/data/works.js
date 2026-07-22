@@ -1,39 +1,52 @@
 /**
- * Replace poster paths, titles, tags, and urls with your real work.
- * poster — image in /public/works/ or external thumbnail URL
- * url — YouTube / Vimeo / TikTok / Instagram / VK / direct link
- * embed — optional embed URL for lightbox (auto-derived when omitted)
+ * poster — image in /public/works/ or external URL
+ * preview — optional muted loop .webm/.mp4 for hover (desktop)
+ * url — YouTube / Vimeo / TikTok / Instagram / direct
+ * span — 12-col grid span on desktop (asymmetric masonry)
+ * year — shown in overlay meta
  */
 export const works = [
   {
     id: "glidex",
     title: { ru: "Glidex", en: "Glidex" },
     tag: { ru: "Reel", en: "Reel" },
+    year: 2025,
     poster: "/works/glidex.png",
+    preview: "/works/glidex-prewiew.mp4",
     url: "https://www.instagram.com/reel/DbGSFgFhdCK/",
     vertical: true,
+    span: 5,
   },
   {
     id: "cs2-digest",
     title: { ru: "CS2 Digest", en: "CS2 Digest" },
     tag: { ru: "Дайджест", en: "Digest" },
-    poster: "https://img.youtube.com/vi/ViXlQpNwhg8/maxresdefault.jpg",
+    year: 2025,
+    poster: "/works/cs2-digest.jpg",
+    preview: null,
     url: "https://youtu.be/ViXlQpNwhg8",
+    span: 7,
   },
   {
     id: "chasiki",
     title: { ru: "Часики тикают", en: "Clock's Ticking" },
     tag: { ru: "Motion", en: "Motion" },
+    year: 2025,
     poster: "/works/chasiki.png",
+    preview: null,
     url: "https://www.tiktok.com/@huanmrvz/video/7663483963192708373",
     vertical: true,
+    span: 4,
   },
   {
     id: "burger-cut",
     title: { ru: "Burger Cut", en: "Burger Cut" },
     tag: { ru: "Стиль", en: "Style" },
+    year: 2025,
     poster: "/works/burger-cut.png",
+    preview: null,
     url: "https://www.tiktok.com/@huanmrvz/video/7661282048660868373",
+    span: 8,
   },
 ];
 

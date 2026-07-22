@@ -1,91 +1,102 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { works, toEmbedUrl } from "../data/works.js";
+import { useReveal } from "../hooks/useReveal.js";
 
-export function Works({ onOpenWork }) {
-  const { lang, t } = useLanguage();
-  const [visible, setVisible] = useState(() => new Set());
-  const itemRefs = useRef([]);
+function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
+  const videoRef = useRef(null);
+  const title = work.title[lang] ?? work.title.en;
+  const tag = work.tag[lang] ?? work.tag.en;
+  const meta = `${title} / ${work.year ?? ""}`.replace(/\s\/\s$/, "");
+  const span = work.span ?? (work.vertical ? 4 : 6);
 
-  useEffect(() => {
-    const nodes = itemRefs.current.filter(Boolean);
-    if (!nodes.length) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(new Set(works.map((_, i) => i)));
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const index = Number(entry.target.dataset.index);
-          setVisible((prev) => {
-            const next = new Set(prev);
-            next.add(index);
-            return next;
-          });
-          io.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    nodes.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
-  function handleClick(e, work) {
+  function handleClick(e) {
     const embed = work.embed || toEmbedUrl(work.url);
     if (!embed) return;
     e.preventDefault();
-    onOpenWork({ embed, url: work.url });
+    onOpenWork({ embed, url: work.url, title });
+  }
+
+  function playPreview() {
+    const v = videoRef.current;
+    if (!v || !work.preview) return;
+    v.currentTime = 0;
+    v.play().catch(() => {});
+  }
+
+  function stopPreview() {
+    const v = videoRef.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
   }
 
   return (
-    <section id="works" className="section works" aria-labelledby="works-title">
-      <div className="section-head">
+    <a
+      className={`work-item${work.vertical ? " work-item--vertical" : ""}`}
+      href={work.url}
+      data-reveal
+      data-cursor="watch"
+      data-span={span}
+      style={{ "--i": index, "--span": span }}
+      onClick={handleClick}
+      onPointerEnter={playPreview}
+      onPointerLeave={stopPreview}
+    >
+      <div
+        className="work-media"
+        style={{ backgroundImage: `url('${work.poster}')` }}
+      >
+        {work.preview ? (
+          <video
+            ref={videoRef}
+            className="work-preview"
+            muted
+            loop
+            playsInline
+            preload="none"
+            tabIndex={-1}
+            src={work.preview}
+          />
+        ) : null}
+      </div>
+      <div className="work-overlay">
+        <span className="work-meta-line">{meta}</span>
+        <span className="work-tag">{tag}</span>
+      </div>
+      <span className="work-play" aria-hidden="true">
+        {watchLabel}
+      </span>
+    </a>
+  );
+}
+
+export function Works({ onOpenWork }) {
+  const { lang, t } = useLanguage();
+  const rootRef = useReveal("[data-reveal]", [lang]);
+
+  return (
+    <section
+      id="works"
+      className="section works"
+      aria-labelledby="works-title"
+      ref={rootRef}
+    >
+      <div className="section-head" data-reveal>
         <h2 id="works-title">{t("works.title")}</h2>
         <p className="section-lead">{t("works.lead")}</p>
       </div>
       <div className="works-grid">
-        {works.map((work, index) => {
-          const title = work.title[lang] ?? work.title.en;
-          const tag = work.tag[lang] ?? work.tag.en;
-          const isVisible = visible.has(index);
-          return (
-            <a
-              key={work.id}
-              className={`work-item${work.vertical ? " work-item--vertical" : ""}${isVisible ? " is-visible" : ""}`}
-              href={work.url}
-              data-index={index}
-              ref={(el) => {
-                itemRefs.current[index] = el;
-              }}
-              onClick={(e) => handleClick(e, work)}
-              style={{ "--i": index }}
-            >
-              <div className="work-flip">
-                <div className="work-face work-face--front">
-                  <div
-                    className="work-media"
-                    style={{ backgroundImage: `url('${work.poster}')` }}
-                  />
-                  <div className="work-meta">
-                    <span className="work-title">{title}</span>
-                    <span className="work-tag">{tag}</span>
-                  </div>
-                </div>
-                <div className="work-face work-face--back">
-                  <span className="work-tag">{tag}</span>
-                  <span className="work-title">{title}</span>
-                  <span className="work-watch">{t("works.watch")}</span>
-                </div>
-              </div>
-            </a>
-          );
-        })}
+        {works.map((work, index) => (
+          <WorkCard
+            key={work.id}
+            work={work}
+            lang={lang}
+            watchLabel={t("works.watch")}
+            onOpenWork={onOpenWork}
+            index={index}
+          />
+        ))}
       </div>
     </section>
   );

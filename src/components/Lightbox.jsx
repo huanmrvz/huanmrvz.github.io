@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useId, useRef } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { isVerticalEmbed } from "../data/works.js";
 
@@ -6,18 +6,53 @@ export function Lightbox({ active, onClose }) {
   const { t } = useLanguage();
   const open = Boolean(active);
   const vertical = open && isVerticalEmbed(active.embed);
+  const titleId = useId();
+  const closeRef = useRef(null);
+  const previouslyFocused = useRef(null);
 
   useEffect(() => {
     if (!open) return undefined;
 
+    previouslyFocused.current = document.activeElement;
     document.body.style.overflow = "hidden";
+    document.body.classList.add("lightbox-open");
+
+    const focusTimer = requestAnimationFrame(() => {
+      closeRef.current?.focus();
+    });
+
     const onKey = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const root = document.querySelector(".lightbox");
+      if (!root) return;
+      const focusables = [
+        ...root.querySelectorAll(
+          'button, [href], iframe, [tabindex]:not([tabindex="-1"])',
+        ),
+      ].filter((el) => !el.hasAttribute("disabled"));
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
+
     document.addEventListener("keydown", onKey);
     return () => {
+      cancelAnimationFrame(focusTimer);
       document.body.style.overflow = "";
+      document.body.classList.remove("lightbox-open");
       document.removeEventListener("keydown", onKey);
+      previouslyFocused.current?.focus?.();
     };
   }, [open, onClose]);
 
@@ -26,16 +61,28 @@ export function Lightbox({ active, onClose }) {
   return (
     <div
       className="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <button type="button" className="lightbox-close" aria-label="Close" onClick={onClose}>
+      <p id={titleId} className="visually-hidden">
+        {active.title || t("lightbox.title")}
+      </p>
+      <button
+        ref={closeRef}
+        type="button"
+        className="lightbox-close"
+        aria-label={t("lightbox.close")}
+        onClick={onClose}
+      >
         &times;
       </button>
       <div className={`lightbox-inner${vertical ? " is-vertical" : ""}`}>
         <iframe
-          title="Work preview"
+          title={active.title || t("lightbox.title")}
           src={active.embed}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
