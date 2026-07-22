@@ -1,5 +1,6 @@
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { BorderBeam } from "./BorderBeam.jsx";
+import { HeroAtmosphere } from "./HeroAtmosphere.jsx";
 
 export function Hero() {
   const { t } = useLanguage();
@@ -7,6 +8,7 @@ export function Hero() {
   return (
     <section className="hero" aria-labelledby="brand">
       <div className="hero-bg" aria-hidden="true" />
+      <HeroAtmosphere />
       <div className="hero-inner">
         <figure className="hero-portrait" aria-hidden="true">
           <img
