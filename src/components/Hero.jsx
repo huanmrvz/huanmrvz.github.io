@@ -1,29 +1,12 @@
-import { useRef } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { BorderBeam } from "./BorderBeam.jsx";
 
 export function Hero() {
   const { t } = useLanguage();
-  const heroRef = useRef(null);
-
-  function onMove(e) {
-    const node = heroRef.current;
-    if (!node) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const rect = node.getBoundingClientRect();
-    node.style.setProperty("--sx", `${e.clientX - rect.left}px`);
-    node.style.setProperty("--sy", `${e.clientY - rect.top}px`);
-  }
 
   return (
-    <section
-      className="hero"
-      aria-labelledby="brand"
-      ref={heroRef}
-      onMouseMove={onMove}
-    >
+    <section className="hero" aria-labelledby="brand">
       <div className="hero-bg" aria-hidden="true" />
-      <div className="hero-spotlight" aria-hidden="true" />
       <div className="hero-inner">
         <figure className="hero-portrait" aria-hidden="true">
           <img

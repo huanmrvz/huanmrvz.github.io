@@ -229,20 +229,6 @@ button {
   content: none;
 }
 
-.hero-spotlight {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: radial-gradient(
-    420px circle at var(--sx, 70%) var(--sy, 40%),
-    rgba(200, 255, 61, 0.14),
-    transparent 45%
-  );
-  opacity: 0.9;
-  transition: opacity 0.3s var(--ease);
-}
-
 .hero-inner {
   position: relative;
   z-index: 1;
@@ -264,7 +250,8 @@ button {
   z-index: 2;
   grid-area: 1 / 1;
   min-width: 0;
-  max-width: 36rem;
+  max-width: min(100%, 38rem);
+  padding-right: min(28vw, 7.5rem);
 }
 
 .hero-portrait {
@@ -272,10 +259,11 @@ button {
   z-index: 0;
   position: relative;
   margin: 0;
-  width: min(58vw, 15rem);
+  width: min(46vw, 13rem);
   aspect-ratio: 1 / 1;
   justify-self: end;
-  align-self: center;
+  align-self: end;
+  margin-bottom: 0.5rem;
   border-radius: 50%;
   overflow: hidden;
   pointer-events: none;
@@ -334,21 +322,29 @@ button {
   }
 
   .hero-portrait {
-    width: min(42vw, 26rem);
-    margin-right: clamp(-1rem, 2vw, 1.5rem);
-    margin-top: 1.25rem;
+    width: min(34vw, 22rem);
+    align-self: center;
+    justify-self: end;
+    margin-right: clamp(-0.5rem, 1vw, 1rem);
+    margin-bottom: 0;
+    margin-top: 3.5rem;
   }
 
   .hero-copy {
-    max-width: 40rem;
+    max-width: 42rem;
+    padding-right: min(26vw, 14rem);
   }
 }
 
 @media (min-width: 980px) {
   .hero-portrait {
-    width: min(36vw, 27rem);
-    margin-right: 4%;
-    margin-top: 1.5rem;
+    width: min(30vw, 24rem);
+    margin-right: -1rem;
+    margin-top: 4rem;
+  }
+
+  .hero-copy {
+    padding-right: 15rem;
   }
 }
 
@@ -374,21 +370,26 @@ button {
 .brand-shimmer {
   position: relative;
   color: var(--ink);
+  text-shadow:
+    0 0 28px rgba(18, 16, 14, 0.95),
+    0 2px 16px rgba(18, 16, 14, 0.85),
+    0 0 2px rgba(18, 16, 14, 1);
+}
+
+.brand-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
     105deg,
-    #f2ebe3 0%,
-    #f2ebe3 38%,
-    #c8ff3d 50%,
-    #f2ebe3 62%,
-    #f2ebe3 100%
+    transparent 35%,
+    rgba(200, 255, 61, 0.45) 50%,
+    transparent 65%
   );
   background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation:
-    rise-in 1s var(--ease) 0.15s forwards,
-    brand-shine 5.5s linear 1.2s infinite;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  animation: brand-shine 5.5s linear 1.2s infinite;
 }
 
 @keyframes brand-shine {
@@ -1138,7 +1139,7 @@ body:has(.lightbox) .fab-telegram {
     color: var(--ink);
   }
 
-  .hero-spotlight,
+  .brand-shimmer::after,
   .border-beam {
     display: none;
   }
