@@ -18,7 +18,7 @@ export const translations = {
     "about.mark2": "кадр",
     "about.mark3": "история",
     "about.proof":
-      "Делаю видео, которые досматривают до конца.\nФорматы: дайджесты, YouTube, короткие ролики.\nСекретный ингредиент: **** * *** * ***\nБеру проекты. Пиши в Telegram — не пропадаю, отвечаю в тот же день.",
+      "Делаю видео, которые досматривают до конца.\nФорматы: дайджесты, YouTube, короткие ролики.\nРежу, пока сам не захочу пересмотреть.\nБеру проекты. Пиши в Telegram — не пропадаю, отвечаю в тот же день.",
     "about.chip1": "DaVinci Resolve",
     "about.chip2": "Reels / TikTok / YouTube",
     "contact.title": "Связь",
@@ -51,7 +51,7 @@ export const translations = {
     "about.mark2": "frame",
     "about.mark3": "story",
     "about.proof":
-      "I make videos people watch to the end.\nFormats: digests, YouTube, short-form.\nSecret ingredient: **** * *** * ***\nOpen for projects. Write on Telegram — I don't disappear, I reply the same day.",
+      "I make videos people watch to the end.\nFormats: digests, YouTube, short-form.\nI cut until I want to rewatch it myself.\nOpen for projects. Write on Telegram — I don't disappear, I reply the same day.",
     "about.chip1": "DaVinci Resolve",
     "about.chip2": "Reels / TikTok / YouTube",
     "contact.title": "Contact",

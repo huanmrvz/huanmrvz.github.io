@@ -1,13 +1,15 @@
 import { useEffect, useId, useRef } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
-import { isVerticalEmbed } from "../data/works.js";
+import { isVerticalWork } from "../data/works.js";
 
 export function Lightbox({ active, onClose }) {
   const { t } = useLanguage();
   const open = Boolean(active);
-  const vertical = open && isVerticalEmbed(active.embed);
+  const hasVideo = open && Boolean(active.video);
+  const vertical = open && isVerticalWork(active);
   const titleId = useId();
   const closeRef = useRef(null);
+  const videoRef = useRef(null);
   const previouslyFocused = useRef(null);
 
   useEffect(() => {
@@ -18,7 +20,14 @@ export function Lightbox({ active, onClose }) {
     document.body.classList.add("lightbox-open");
 
     const focusTimer = requestAnimationFrame(() => {
-      closeRef.current?.focus();
+      if (hasVideo && videoRef.current) {
+        const el = videoRef.current;
+        el.currentTime = 0;
+        el.play().catch(() => {});
+        el.focus();
+      } else {
+        closeRef.current?.focus();
+      }
     });
 
     const onKey = (e) => {
@@ -31,7 +40,7 @@ export function Lightbox({ active, onClose }) {
       if (!root) return;
       const focusables = [
         ...root.querySelectorAll(
-          'button, [href], iframe, [tabindex]:not([tabindex="-1"])',
+          'button, [href], video, iframe, [tabindex]:not([tabindex="-1"])',
         ),
       ].filter((el) => !el.hasAttribute("disabled"));
       if (!focusables.length) return;
@@ -49,12 +58,17 @@ export function Lightbox({ active, onClose }) {
     document.addEventListener("keydown", onKey);
     return () => {
       cancelAnimationFrame(focusTimer);
+      const el = videoRef.current;
+      if (el) {
+        el.pause();
+        el.currentTime = 0;
+      }
       document.body.style.overflow = "";
       document.body.classList.remove("lightbox-open");
       document.removeEventListener("keydown", onKey);
       previouslyFocused.current?.focus?.();
     };
-  }, [open, onClose]);
+  }, [open, onClose, hasVideo, active?.video]);
 
   if (!open) return null;
 
@@ -80,21 +94,38 @@ export function Lightbox({ active, onClose }) {
       >
         &times;
       </button>
-      <div className={`lightbox-inner${vertical ? " is-vertical" : ""}`}>
-        <iframe
-          title={active.title || t("lightbox.title")}
-          src={active.embed}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-        <a
-          className="lightbox-external"
-          href={active.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t("lightbox.open")}
-        </a>
+      <div
+        className={`lightbox-inner${vertical ? " is-vertical" : ""}${hasVideo ? " has-native" : ""}`}
+      >
+        {hasVideo ? (
+          <video
+            key={active.video}
+            ref={videoRef}
+            className="lightbox-video"
+            src={active.video}
+            controls
+            playsInline
+            preload="auto"
+            poster={active.poster || undefined}
+          />
+        ) : (
+          <iframe
+            title={active.title || t("lightbox.title")}
+            src={active.embed}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        )}
+        {active.url ? (
+          <a
+            className="lightbox-external"
+            href={active.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("lightbox.open")}
+          </a>
+        ) : null}
       </div>
     </div>
   );

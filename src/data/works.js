@@ -1,52 +1,52 @@
 /**
  * poster — image in /public/works/ or external URL
- * preview — optional muted loop .webm/.mp4 for hover (desktop)
- * url — YouTube / Vimeo / TikTok / Instagram / direct
- * span — 12-col grid span on desktop (asymmetric masonry)
- * year — shown in overlay meta
+ * preview — optional muted loop for hover (desktop)
+ * video — local mp4/webm for seamless lightbox (preferred over embed)
+ * url — original platform link / YouTube
+ * span — 12-col grid span on desktop
  */
 export const works = [
   {
     id: "glidex",
     title: { ru: "Glidex", en: "Glidex" },
     tag: { ru: "Reel", en: "Reel" },
-    year: 2025,
     poster: "/works/glidex.png",
     preview: "/works/glidex-prewiew.mp4",
+    video: "/works/glidex.mp4",
     url: "https://www.instagram.com/reel/DbGSFgFhdCK/",
     vertical: true,
     span: 5,
   },
   {
-    id: "cs2-digest",
-    title: { ru: "CS2 Digest", en: "CS2 Digest" },
-    tag: { ru: "Дайджест", en: "Digest" },
-    year: 2025,
-    poster: "/works/cs2-digest.jpg",
-    preview: null,
-    url: "https://youtu.be/ViXlQpNwhg8",
-    span: 7,
-  },
-  {
     id: "chasiki",
     title: { ru: "Часики тикают", en: "Clock's Ticking" },
     tag: { ru: "Motion", en: "Motion" },
-    year: 2025,
     poster: "/works/chasiki.png",
     preview: null,
+    video: "/works/chasiki.mp4",
     url: "https://www.tiktok.com/@huanmrvz/video/7663483963192708373",
     vertical: true,
-    span: 4,
+    span: 7,
   },
   {
     id: "burger-cut",
     title: { ru: "Burger Cut", en: "Burger Cut" },
     tag: { ru: "Стиль", en: "Style" },
-    year: 2025,
     poster: "/works/burger-cut.png",
     preview: null,
+    video: "/works/burger-cut.mp4",
     url: "https://www.tiktok.com/@huanmrvz/video/7661282048660868373",
     span: 8,
+  },
+  {
+    id: "cs2-digest",
+    title: { ru: "CS2 Digest", en: "CS2 Digest" },
+    tag: { ru: "Дайджест", en: "Digest" },
+    poster: "/works/cs2-digest.jpg",
+    preview: null,
+    video: null,
+    url: "https://youtu.be/ViXlQpNwhg8",
+    span: 4,
   },
 ];
 
@@ -78,9 +78,12 @@ export function toEmbedUrl(url) {
   return null;
 }
 
-export function isVerticalEmbed(embedUrl) {
+export function isVerticalWork(workOrFlag) {
+  if (typeof workOrFlag === "boolean") return workOrFlag;
+  if (workOrFlag?.vertical) return true;
+  const embed = workOrFlag?.embed;
   return Boolean(
-    embedUrl &&
-      (embedUrl.includes("tiktok.com") || embedUrl.includes("instagram.com")),
+    embed &&
+      (embed.includes("tiktok.com") || embed.includes("instagram.com")),
   );
 }

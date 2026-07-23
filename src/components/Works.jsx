@@ -7,19 +7,27 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
   const videoRef = useRef(null);
   const title = work.title[lang] ?? work.title.en;
   const tag = work.tag[lang] ?? work.tag.en;
-  const meta = `${title} / ${work.year ?? ""}`.replace(/\s\/\s$/, "");
   const span = work.span ?? (work.vertical ? 4 : 6);
+  const hoverSrc = work.preview || work.video;
 
   function handleClick(e) {
+    const video = work.video || work.preview || null;
     const embed = work.embed || toEmbedUrl(work.url);
-    if (!embed) return;
+    if (!video && !embed) return;
     e.preventDefault();
-    onOpenWork({ embed, url: work.url, title });
+    onOpenWork({
+      video,
+      embed: video ? null : embed,
+      url: work.url,
+      title,
+      poster: work.poster,
+      vertical: Boolean(work.vertical),
+    });
   }
 
   function playPreview() {
     const v = videoRef.current;
-    if (!v || !work.preview) return;
+    if (!v || !hoverSrc) return;
     v.currentTime = 0;
     v.play().catch(() => {});
   }
@@ -47,7 +55,7 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
         className="work-media"
         style={{ backgroundImage: `url('${work.poster}')` }}
       >
-        {work.preview ? (
+        {hoverSrc ? (
           <video
             ref={videoRef}
             className="work-preview"
@@ -56,12 +64,12 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
             playsInline
             preload="none"
             tabIndex={-1}
-            src={work.preview}
+            src={hoverSrc}
           />
         ) : null}
       </div>
       <div className="work-overlay">
-        <span className="work-meta-line">{meta}</span>
+        <span className="work-meta-line">{title}</span>
         <span className="work-tag">{tag}</span>
       </div>
       <span className="work-play" aria-hidden="true">
