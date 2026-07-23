@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { works, toEmbedUrl } from "../data/works.js";
 import { useReveal } from "../hooks/useReveal.js";
+import { preloadVideo, warmWorkVideos } from "../lib/preloadVideo.js";
 
 function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
   const videoRef = useRef(null);
@@ -9,12 +10,18 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
   const tag = work.tag[lang] ?? work.tag.en;
   const span = work.span ?? (work.vertical ? 4 : 6);
   const hoverSrc = work.preview || work.video;
+  const fullSrc = work.video || work.preview || null;
+
+  function warmFull() {
+    if (fullSrc) preloadVideo(fullSrc);
+  }
 
   function handleClick(e) {
-    const video = work.video || work.preview || null;
+    const video = fullSrc;
     const embed = work.embed || toEmbedUrl(work.url);
     if (!video && !embed) return;
     e.preventDefault();
+    if (video) preloadVideo(video);
     onOpenWork({
       video,
       embed: video ? null : embed,
@@ -26,6 +33,7 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
   }
 
   function playPreview() {
+    warmFull();
     const v = videoRef.current;
     if (!v || !hoverSrc) return;
     v.currentTime = 0;
@@ -50,6 +58,8 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
       onClick={handleClick}
       onPointerEnter={playPreview}
       onPointerLeave={stopPreview}
+      onFocus={warmFull}
+      onPointerDown={warmFull}
     >
       <div
         className="work-media"
@@ -62,7 +72,7 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
             muted
             loop
             playsInline
-            preload="none"
+            preload="metadata"
             tabIndex={-1}
             src={hoverSrc}
           />
@@ -82,6 +92,31 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
 export function Works({ onOpenWork }) {
   const { lang, t } = useLanguage();
   const rootRef = useReveal("[data-reveal]", [lang]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+
+    const urls = works.map((w) => w.video).filter(Boolean);
+    let stopWarm = () => {};
+    let started = false;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || started) return;
+        started = true;
+        stopWarm = warmWorkVideos(urls);
+        io.disconnect();
+      },
+      { rootMargin: "200px 0px", threshold: 0.05 },
+    );
+
+    io.observe(root);
+    return () => {
+      io.disconnect();
+      stopWarm();
+    };
+  }, [rootRef]);
 
   return (
     <section

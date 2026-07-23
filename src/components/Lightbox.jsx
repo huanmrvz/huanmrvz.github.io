@@ -1,6 +1,7 @@
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { isVerticalWork } from "../data/works.js";
+import { preloadVideo } from "../lib/preloadVideo.js";
 
 export function Lightbox({ active, onClose }) {
   const { t } = useLanguage();
@@ -11,21 +12,44 @@ export function Lightbox({ active, onClose }) {
   const closeRef = useRef(null);
   const videoRef = useRef(null);
   const previouslyFocused = useRef(null);
+  const [mediaReady, setMediaReady] = useState(false);
 
   useEffect(() => {
-    if (!open) return undefined;
+    if (!open) {
+      setMediaReady(false);
+      return undefined;
+    }
 
     previouslyFocused.current = document.activeElement;
     document.body.style.overflow = "hidden";
     document.body.classList.add("lightbox-open");
 
+    if (hasVideo && active.video) {
+      preloadVideo(active.video);
+    }
+
     const focusTimer = requestAnimationFrame(() => {
       if (hasVideo && videoRef.current) {
         const el = videoRef.current;
-        el.currentTime = 0;
-        el.play().catch(() => {});
+        const tryPlay = () => {
+          el.play().catch(() => {});
+        };
+        if (el.readyState >= 3) {
+          setMediaReady(true);
+          el.currentTime = 0;
+          tryPlay();
+        } else {
+          const onReady = () => {
+            setMediaReady(true);
+            el.currentTime = 0;
+            tryPlay();
+          };
+          el.addEventListener("canplay", onReady, { once: true });
+          tryPlay();
+        }
         el.focus();
       } else {
+        setMediaReady(true);
         closeRef.current?.focus();
       }
     });
@@ -101,12 +125,13 @@ export function Lightbox({ active, onClose }) {
           <video
             key={active.video}
             ref={videoRef}
-            className="lightbox-video"
+            className={`lightbox-video${mediaReady ? " is-ready" : ""}`}
             src={active.video}
             controls
             playsInline
             preload="auto"
             poster={active.poster || undefined}
+            onCanPlay={() => setMediaReady(true)}
           />
         ) : (
           <iframe
