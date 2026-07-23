@@ -7,10 +7,6 @@ export function HeroAtmosphere() {
       <span className="hero-frame hero-frame--a" />
       <span className="hero-frame hero-frame--b" />
       <span className="hero-frame hero-frame--c" />
-      <div className="hero-rail">
-        <span className="hero-rail-fill" />
-        <span className="hero-rail-head" />
-      </div>
       <div className="hero-sparks">
         <i />
         <i />
