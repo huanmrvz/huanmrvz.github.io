@@ -50,7 +50,7 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
   return (
     <a
       className={`work-item${work.vertical ? " work-item--vertical" : ""}`}
-      href={work.url}
+      href={work.url || "#works"}
       data-reveal
       data-cursor="watch"
       data-span={span}
@@ -61,30 +61,32 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
       onFocus={warmFull}
       onPointerDown={warmFull}
     >
-      <div
-        className="work-media"
-        style={{ backgroundImage: `url('${work.poster}')` }}
-      >
-        {hoverSrc ? (
-          <video
-            ref={videoRef}
-            className="work-preview"
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            tabIndex={-1}
-            src={hoverSrc}
-          />
-        ) : null}
+      <div className="work-face">
+        <div
+          className="work-media"
+          style={{ backgroundImage: `url('${work.poster}')` }}
+        >
+          {hoverSrc ? (
+            <video
+              ref={videoRef}
+              className="work-preview"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              tabIndex={-1}
+              src={hoverSrc}
+            />
+          ) : null}
+        </div>
+        <div className="work-overlay">
+          <span className="work-meta-line">{title}</span>
+          <span className="work-tag">{tag}</span>
+        </div>
+        <span className="work-play" aria-hidden="true">
+          {watchLabel}
+        </span>
       </div>
-      <div className="work-overlay">
-        <span className="work-meta-line">{title}</span>
-        <span className="work-tag">{tag}</span>
-      </div>
-      <span className="work-play" aria-hidden="true">
-        {watchLabel}
-      </span>
     </a>
   );
 }

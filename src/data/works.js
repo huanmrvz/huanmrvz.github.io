@@ -7,6 +7,17 @@
  */
 export const works = [
   {
+    id: "yoga-reel",
+    title: { ru: "Yoga Reel", en: "Yoga Reel" },
+    tag: { ru: "Reel", en: "Reel" },
+    poster: "/works/yoga-reel.jpg",
+    preview: null,
+    video: "/works/yoga-reel.mp4",
+    url: null,
+    vertical: true,
+    span: 5,
+  },
+  {
     id: "glidex",
     title: { ru: "Glidex", en: "Glidex" },
     tag: { ru: "Reel", en: "Reel" },
@@ -26,7 +37,7 @@ export const works = [
     video: "/works/chasiki.mp4",
     url: "https://www.tiktok.com/@huanmrvz/video/7663483963192708373",
     vertical: true,
-    span: 7,
+    span: 4,
   },
   {
     id: "burger-cut",

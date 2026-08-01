@@ -985,10 +985,10 @@ button {
   }
 }
 
-/* Works — compact chaotic collage */
+/* Works — billboard collage */
 .works-grid {
   display: grid;
-  gap: 0.85rem;
+  gap: 1rem;
   grid-template-columns: 1fr;
   align-items: start;
 }
@@ -996,18 +996,71 @@ button {
 .work-item {
   position: relative;
   display: block;
-  overflow: hidden;
-  background: #050505;
-  min-height: clamp(200px, 52vw, 260px);
+  overflow: visible;
+  min-height: 0;
+  padding: 0.48rem 0.48rem 0.62rem;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(
+      160deg,
+      #3f3f3c 0%,
+      #232321 38%,
+      #141413 72%,
+      #0c0c0b 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+    0 12px 28px rgba(0, 0, 0, 0.48);
   opacity: 0;
   isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+}
+
+.work-item::before {
+  content: "";
+  position: absolute;
+  inset: 0.22rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.work-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 6;
+  background:
+    radial-gradient(circle at 12% 14%, rgba(255, 255, 255, 0.22) 0 1.5px, transparent 2.2px),
+    radial-gradient(circle at 88% 14%, rgba(255, 255, 255, 0.22) 0 1.5px, transparent 2.2px),
+    radial-gradient(circle at 12% 88%, rgba(255, 255, 255, 0.16) 0 1.5px, transparent 2.2px),
+    radial-gradient(circle at 88% 88%, rgba(255, 255, 255, 0.16) 0 1.5px, transparent 2.2px);
+  opacity: 0.85;
+}
+
+.work-face {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: #111;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.65),
+    inset 0 8px 18px rgba(0, 0, 0, 0.28);
 }
 
 .work-item--vertical {
-  width: min(100%, 16rem);
+  width: min(100%, 17rem);
   margin-inline: auto;
+}
+
+.work-item--vertical .work-face {
   aspect-ratio: 9 / 16;
-  min-height: 0;
 }
 
 .work-media {
@@ -1015,13 +1068,8 @@ button {
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: transform 0.8s var(--ease);
-}
-
-.work-item--vertical .work-media {
-  background-size: contain;
   background-repeat: no-repeat;
-  background-color: #050505;
+  transition: transform 0.8s var(--ease);
 }
 
 .work-preview {
@@ -1065,8 +1113,8 @@ button {
 
 .work-play {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.85rem;
+  right: 0.85rem;
   z-index: 3;
   padding: 0.4rem 0.7rem;
   font-family: var(--font-mono);
@@ -1108,21 +1156,20 @@ button {
 @media (min-width: 720px) {
   .works-grid {
     grid-template-columns: repeat(12, 1fr);
-    gap: 1.1rem 1rem;
+    gap: 1.25rem 1.1rem;
     padding-bottom: 0.75rem;
   }
 
   .work-item {
     grid-column: span var(--span, 6);
-    min-height: 220px;
     margin-top: 0;
     margin-left: 0;
   }
 
   .work-item--vertical {
     width: 100%;
-    justify-self: stretch;
-    max-height: 26rem;
+    max-width: 21rem;
+    justify-self: center;
   }
 
   /* Mild chaos: tilt + small drop, never overlap */
@@ -1145,19 +1192,20 @@ button {
     margin-top: 0.65rem;
     rotate: -0.8deg;
   }
+
+  .work-item:nth-child(5) {
+    margin-top: 0.4rem;
+    rotate: 0.9deg;
+  }
 }
 
 @media (min-width: 980px) {
   .works-grid {
-    gap: 1.25rem 1.15rem;
-  }
-
-  .work-item {
-    min-height: 250px;
+    gap: 1.4rem 1.2rem;
   }
 
   .work-item--vertical {
-    max-height: 30rem;
+    max-width: 23rem;
   }
 }
 
