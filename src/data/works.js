@@ -7,6 +7,17 @@
  */
 export const works = [
   {
+    id: "fonts-motion",
+    title: { ru: "Fonts + Motion", en: "Fonts + Motion" },
+    tag: { ru: "Motion", en: "Motion" },
+    poster: "/works/fonts-motion.jpg",
+    preview: null,
+    video: "/works/fonts-motion.mp4",
+    url: null,
+    vertical: true,
+    span: 7,
+  },
+  {
     id: "yoga-reel",
     title: { ru: "Yoga Reel", en: "Yoga Reel" },
     tag: { ru: "Reel", en: "Reel" },

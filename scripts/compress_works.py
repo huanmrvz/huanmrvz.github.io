@@ -14,6 +14,7 @@ WORKS = ROOT / "public" / "works"
 # name -> (crf, max_edge, audio_kbps)
 # max_edge = longest side limit (vertical height or horizontal width)
 SETTINGS = {
+    "fonts-motion.mp4": (26, 1280, 96),
     "chasiki.mp4": (26, 1280, 96),
     "glidex.mp4": (26, 1280, 96),
     "burger-cut.mp4": (26, 1280, 96),
