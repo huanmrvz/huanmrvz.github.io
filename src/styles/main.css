@@ -54,13 +54,6 @@ body {
   overflow-x: clip;
 }
 
-html.has-custom-cursor,
-html.has-custom-cursor body,
-html.has-custom-cursor a,
-html.has-custom-cursor button {
-  cursor: none;
-}
-
 img,
 video {
   max-width: 100%;
@@ -114,53 +107,6 @@ button {
   50% { transform: translate(1%, -1%); }
   75% { transform: translate(-1%, 2%); }
   100% { transform: translate(0, 0); }
-}
-
-/* Custom cursor */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 50%;
-  border: 1.5px solid rgba(245, 245, 245, 0.85);
-  background: rgba(200, 255, 61, 0.35);
-  box-shadow: 0 0 12px rgba(200, 255, 61, 0.25);
-  pointer-events: none;
-  display: grid;
-  place-items: center;
-  will-change: transform;
-  transition:
-    width 0.28s var(--ease),
-    height 0.28s var(--ease),
-    background 0.28s var(--ease),
-    border-color 0.28s var(--ease),
-    box-shadow 0.28s var(--ease);
-}
-
-.cursor-dot-label {
-  font-family: var(--font-mono);
-  font-size: 0.5rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--accent-ink);
-  opacity: 0;
-  transform: scale(0.6);
-  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
-}
-
-.cursor-dot.is-watch {
-  width: 2.25rem;
-  height: 2.25rem;
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-.cursor-dot.is-watch .cursor-dot-label {
-  opacity: 1;
-  transform: scale(1);
 }
 
 /* Header */
@@ -1642,8 +1588,7 @@ body:has(.lightbox) .fab-telegram {
   .brand-shimmer::after,
   .border-beam,
   .hero-atmosphere,
-  .hero-portrait-shine,
-  .cursor-dot {
+  .hero-portrait-shine {
     display: none;
   }
 
@@ -1657,10 +1602,4 @@ body:has(.lightbox) .fab-telegram {
     animation: none;
   }
 
-  html.has-custom-cursor,
-  html.has-custom-cursor body,
-  html.has-custom-cursor a,
-  html.has-custom-cursor button {
-    cursor: auto;
-  }
 }
