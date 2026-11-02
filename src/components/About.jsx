@@ -91,6 +91,7 @@ export function About() {
         <ul className="about-chips">
           <li>{t("about.chip1")}</li>
           <li>{t("about.chip2")}</li>
+          <li>{t("about.chip3")}</li>
         </ul>
       </div>
     </section>
