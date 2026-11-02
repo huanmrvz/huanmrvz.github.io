@@ -40,6 +40,17 @@ export const works = [
     span: 5,
   },
   {
+    id: "hair-care",
+    title: { ru: "Hair Care", en: "Hair Care — Shampoo Ad" },
+    tag: { ru: "Реклама", en: "Commercial" },
+    poster: null,
+    preview: null,
+    video: "/works/hair_care.mp4",
+    url: null,
+    vertical: true,
+    span: 5,
+  },
+  {
     id: "burger-cut",
     title: { ru: "Burger Cut", en: "Burger Cut" },
     tag: { ru: "Стиль", en: "Style" },
