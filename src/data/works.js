@@ -43,7 +43,7 @@ export const works = [
     id: "hair-care",
     title: { ru: "Hair Care", en: "Hair Care — Shampoo Ad" },
     tag: { ru: "Реклама", en: "Commercial" },
-    poster: null,
+    poster: "/works/hair_care_prew.jpg",
     preview: null,
     video: "/works/hair_care.mp4",
     url: null,
