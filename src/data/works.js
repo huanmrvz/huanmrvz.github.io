@@ -40,17 +40,6 @@ export const works = [
     span: 5,
   },
   {
-    id: "chasiki",
-    title: { ru: "Часики тикают", en: "Clock's Ticking" },
-    tag: { ru: "Motion", en: "Motion" },
-    poster: "/works/chasiki.png",
-    preview: null,
-    video: "/works/chasiki.mp4",
-    url: "https://www.tiktok.com/@huanmrvz/video/7663483963192708373",
-    vertical: true,
-    span: 4,
-  },
-  {
     id: "burger-cut",
     title: { ru: "Burger Cut", en: "Burger Cut" },
     tag: { ru: "Стиль", en: "Style" },
