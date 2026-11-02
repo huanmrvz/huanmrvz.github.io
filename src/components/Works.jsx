@@ -64,7 +64,7 @@ function WorkCard({ work, lang, watchLabel, onOpenWork, index }) {
       <div className="work-face">
         <div
           className="work-media"
-          style={{ backgroundImage: `url('${work.poster}')` }}
+          style={work.poster ? { backgroundImage: `url('${work.poster}')` } : undefined}
         >
           {hoverSrc ? (
             <video
