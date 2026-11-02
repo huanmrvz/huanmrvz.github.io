@@ -67,22 +67,22 @@ export function toEmbedUrl(url) {
     const u = new URL(url);
     if (u.hostname.includes("youtube.com")) {
       const id = u.searchParams.get("v");
-      if (id) return `https://www.youtube.com/embed/${id}`;
+      if (id) return \`https://www.youtube.com/embed/\${id}\`;
     }
     if (u.hostname === "youtu.be") {
-      return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+      return \`https://www.youtube.com/embed/\${u.pathname.slice(1)}\`;
     }
     if (u.hostname.includes("vimeo.com")) {
       const id = u.pathname.split("/").filter(Boolean).pop();
-      if (id) return `https://player.vimeo.com/video/${id}`;
+      if (id) return \`https://player.vimeo.com/video/\${id}\`;
     }
     if (u.hostname.includes("tiktok.com")) {
-      const match = u.pathname.match(/\\/video\\/(\\d+)/);
-      if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
+      const match = u.pathname.match(/\/video\/(\d+)/);
+      if (match) return \`https://www.tiktok.com/embed/v2/\${match[1]}\`;
     }
     if (u.hostname.includes("instagram.com")) {
-      const match = u.pathname.match(/\\/(reel|p|tv)\\/([^/?]+)/);
-      if (match) return `https://www.instagram.com/${match[1]}/${match[2]}/embed`;
+      const match = u.pathname.match(/\/(reel|p|tv)\/([^/?]+)/);
+      if (match) return \`https://www.instagram.com/\${match[1]}/\${match[2]}/embed\`;
     }
   } catch {
     /* ignore */
