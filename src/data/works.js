@@ -18,12 +18,12 @@ export const works = [
     span: 7,
   },
   {
-    id: "yoga-reel",
-    title: { ru: "Yoga Reel", en: "Yoga Reel" },
-    tag: { ru: "Reel", en: "Reel" },
-    poster: "/works/yoga-reel.jpg",
+    id: "hair-care",
+    title: { ru: "Hair Care", en: "Hair Care — Shampoo Ad" },
+    tag: { ru: "Реклама", en: "Commercial" },
+    poster: "/works/hair_care_prew.jpg",
     preview: null,
-    video: "/works/yoga-reel.mp4",
+    video: "/works/hair_care.mp4",
     url: null,
     vertical: true,
     span: 5,
@@ -40,12 +40,12 @@ export const works = [
     span: 5,
   },
   {
-    id: "hair-care",
-    title: { ru: "Hair Care", en: "Hair Care — Shampoo Ad" },
-    tag: { ru: "Реклама", en: "Commercial" },
-    poster: "/works/hair_care_prew.jpg",
+    id: "yoga-reel",
+    title: { ru: "Yoga Reel", en: "Yoga Reel" },
+    tag: { ru: "Reel", en: "Reel" },
+    poster: "/works/yoga-reel.jpg",
     preview: null,
-    video: "/works/hair_care.mp4",
+    video: "/works/yoga-reel.mp4",
     url: null,
     vertical: true,
     span: 5,
@@ -77,11 +77,11 @@ export function toEmbedUrl(url) {
       if (id) return `https://player.vimeo.com/video/${id}`;
     }
     if (u.hostname.includes("tiktok.com")) {
-      const match = u.pathname.match(/\/video\/(\d+)/);
+      const match = u.pathname.match(/\\/video\\/(\\d+)/);
       if (match) return `https://www.tiktok.com/embed/v2/${match[1]}`;
     }
     if (u.hostname.includes("instagram.com")) {
-      const match = u.pathname.match(/\/(reel|p|tv)\/([^/?]+)/);
+      const match = u.pathname.match(/\\/(reel|p|tv)\\/([^/?]+)/);
       if (match) return `https://www.instagram.com/${match[1]}/${match[2]}/embed`;
     }
   } catch {
