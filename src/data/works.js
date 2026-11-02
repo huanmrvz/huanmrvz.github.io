@@ -60,16 +60,6 @@ export const works = [
     url: "https://www.tiktok.com/@huanmrvz/video/7661282048660868373",
     span: 8,
   },
-  {
-    id: "cs2-digest",
-    title: { ru: "CS2 Digest", en: "CS2 Digest" },
-    tag: { ru: "Дайджест", en: "Digest" },
-    poster: "/works/cs2-digest.jpg",
-    preview: null,
-    video: null,
-    url: "https://youtu.be/ViXlQpNwhg8",
-    span: 4,
-  },
 ];
 
 export function toEmbedUrl(url) {
